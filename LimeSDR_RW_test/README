@@ -1,0 +1,41 @@
+LimeSDR mini 收发测试程序
+
+	作者： bitQ 1174316744@qq.com
+	时间： 2018/8/28
+
+	Ubuntu: 16.04
+	GNURadio: 3.7.12.0
+	GRC环境： GNU Radio Companion
+注意默认的GNURdio环境是不支持LimeSDR的，需要额外安装 
+1) LimeSuite 
+	http://wiki.myriadrf.org/Lime_Suite
+2) gr-osmosdr
+	安装包支持
+		sudo apt-get install libsoapysdr-dev
+		sudo apt install gr-fcdproplus
+	源码编译与安装
+		git clone git://git.osmocom.org/gr-osmosdr
+		cd gr-osmosdr/
+		mkdir build
+		cd build/
+		cmake ../
+		make
+		sudo make install
+		sudo ldconfig
+
+参考手把手教你搭建USRP在Linux GNU Radio下的开发环境
+	http://digital.ni.com/public.nsf/allkb/825823A54D291719862580D4003410B8
+修改说明：
+	对grc程序进行了修改，采用osmocom Sink/Source替换USRP的Sink/Source
+	增加rx_RF_Gain/tx_RF_Gain用于接收发送的增益控制
+
+程序功能概述：
+	本地文件send.txt通过GMSK调制后由LimeSDR TX端发送出去（重复发送）；通过LimeSDR RX端对该信号接收，并对其GMSK解调，最后将接收的数据保存到recv.txt中；
+	rx_RF_Gain/tx_RF_Gain用于接收发送的增益控；
+	QT GUI Sink 用于查看收发 FFT/波形等
+使用注意事项：
+	修改收发文件路径成你放的本地路径
+
+
+
+
